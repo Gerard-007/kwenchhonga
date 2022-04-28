@@ -45,11 +45,12 @@ class APIService {
   }
 
   // post data
-  Future postData(String url, Map<String, dynamic> body) async {
+  Future<http.Response> postData(String url, Map<String, dynamic> body) async {
     SharedPreferences _pref = await SharedPreferences.getInstance();
     var token = _pref.getString("login");
-    // String url = "$baseUrl/api/auth/user/";
     url = baseUrl + url;
+    //About to send data
+    print("About to send data...");
     var response = await http.post(
       Uri.parse(url),
       headers: {
@@ -58,13 +59,15 @@ class APIService {
       },
       body: json.encode(body),
     );
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      // ignore: avoid_print
-      print("Data submited sucessfully.");
-      return response;
-    } else {
-      throw Exception("Something went wrong.");
-    }
+    print("Data sent successfully...");
+    return response;
+    // if (response.statusCode == 200 || response.statusCode == 201) {
+    //   // ignore: avoid_print
+    //   print("Data submited sucessfully.");
+    //   return response;
+    // } else {
+    //   throw Exception("Something went wrong.");
+    // }
   }
 
   //update

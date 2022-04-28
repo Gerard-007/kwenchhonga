@@ -1,10 +1,7 @@
 // ignore_for_file: deprecated_member_use
-
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -114,12 +111,14 @@ class _profileScreenState extends State<profileScreen> {
                     });
                     //profile.avatarUrl;
                     if (_globalKey.currentState.validate()) {
+                      // ignore: avoid_print
                       print("Current selected gender $selectedValue");
                       Map<String, String> data = {
                         "fname": _firstName.text,
                         "lname": _lastName.text,
                         "gender": selectedValue.toString(),
                       };
+                      // ignore: avoid_print
                       print(data);
                       var response = await apiService.updateData(
                           "/api/auth/profile/user/", data);

@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:kwenchhonga/api/api_service.dart';
 import 'package:kwenchhonga/models/user_model.dart';
 import 'package:humanize/humanize.dart' as humanize;
-import 'package:kwenchhonga/screens/profile_edit.dart';
 import 'package:kwenchhonga/screens/transactions.dart';
 import 'package:kwenchhonga/screens/withdrawal_screen.dart';
 import 'package:kwenchhonga/utils/connection_error.dart';

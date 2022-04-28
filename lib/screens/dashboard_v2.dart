@@ -33,7 +33,7 @@ class dashboardScreenV2 extends StatelessWidget {
             // backgroundColor: Color(0xFF5E426B),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_balance),
+            icon: Icon(Icons.shopping_bag),
             label: 'Plans',
             // backgroundColor: Color(0xFF5E426B),
           ),

@@ -8,7 +8,7 @@ class CurrentUserModelClass {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (user != null) {
       data['user'] = user.toJson();
     }
@@ -31,15 +31,15 @@ class User {
     phone = json['phone'] ?? "";
     myBalance = json['my_balance'] ?? "";
     profile =
-        json['profile'] != null ? Profile.fromJson(json['profile']) : null;
+        json['profile'] != null ? new Profile.fromJson(json['profile']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['username'] = username;
-    data['email'] = email;
-    data['phone'] = phone;
-    data['my_balance'] = myBalance;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['username'] = username ?? "";
+    data['email'] = email ?? "";
+    data['phone'] = phone ?? "";
+    data['my_balance'] = myBalance ?? "";
     if (profile != null) {
       data['profile'] = profile.toJson();
     }
@@ -57,7 +57,7 @@ class Profile {
   String avatarUrl;
   String pastPlanName;
   String pastPlanPrice;
-  String pastPlanDate;
+  DateTime pastPlanDate;
   String plansCount;
   String transactionsCount;
   String successfulPastPayment;
@@ -89,7 +89,7 @@ class Profile {
     avatarUrl = json['avatar_url'] ?? "";
     pastPlanName = json['past_plan_name'] ?? "";
     pastPlanPrice = json['past_plan_price'] ?? "";
-    pastPlanDate = json['past_plan_date'] ?? "";
+    pastPlanDate = DateTime.parse(json['past_plan_date']) ?? DateTime.now();
     plansCount = json['plans_count'] ?? "";
     transactionsCount = json['transactions_count'] ?? "";
     successfulPastPayment = json['successful_past_payment'] ?? "";
@@ -97,21 +97,21 @@ class Profile {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] ?? "";
-    data['fname'] ?? "";
-    data['lname'] ?? "";
-    data['full_name'] ?? "";
-    data['gender'] ?? "";
-    data['avatar'] ?? "";
-    data['avatar_url'] ?? "";
-    data['past_plan_name'] ?? "";
-    data['past_plan_price'] ?? "";
-    data['past_plan_date'] ?? "";
-    data['plans_count'] ?? "";
-    data['transactions_count'] ?? "";
-    data['successful_past_payment'] ?? "";
-    data['pending_balance'] ?? "";
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id ?? "";
+    data['fname'] = fname ?? "";
+    data['lname'] = lname ?? "";
+    data['full_name'] = fullName ?? "";
+    data['gender'] = gender ?? "";
+    data['avatar'] = avatar ?? "";
+    data['avatar_url'] = avatarUrl ?? "";
+    data['past_plan_name'] = pastPlanName ?? "";
+    data['past_plan_price'] = pastPlanPrice ?? "";
+    data['past_plan_date'] = pastPlanDate.toIso8601String();
+    data['plans_count'] = plansCount ?? "";
+    data['transactions_count'] = transactionsCount ?? "";
+    data['successful_past_payment'] = successfulPastPayment ?? "";
+    data['pending_balance'] = pendingBalance ?? "";
     return data;
   }
 }

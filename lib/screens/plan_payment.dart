@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:kwenchhonga/api/api_service.dart';
 import 'package:kwenchhonga/models/plan_model.dart';
 import 'package:kwenchhonga/models/user_model_v2.dart';
@@ -22,6 +23,7 @@ class _planPaymentScreenState extends State<planPaymentScreen> {
   PlanModelClass getPlan;
   final apiService = APIService();
   CurrentUserModelClass currentUser = CurrentUserModelClass();
+  bool circular = false;
 
   @override
   void initState() {
@@ -36,6 +38,7 @@ class _planPaymentScreenState extends State<planPaymentScreen> {
     var res = await apiService.getDataV2("/api/auth/user/");
     setState(() {
       currentUser = CurrentUserModelClass.fromJson(res);
+      print(currentUser.user.email);
     });
   }
 
@@ -170,29 +173,39 @@ class _planPaymentScreenState extends State<planPaymentScreen> {
                         ),
                       ),
                     ),
-                    child: Row(
-                      // ignore: prefer_const_literals_to_create_immutables
-                      children: [
-                        const Icon(Icons.security),
-                        SizedBox(
-                          width: 5.w,
-                        ),
-                        const Text("Proceed to Payment"),
-                      ],
-                    ),
-                    onPressed: () {
-                      // ignore: avoid_print
-                      print("Pay with paystack...");
-
-                      MakePayment(
-                        ctx: context,
-                        email: currentUser.user.email,
-                        fullname: currentUser.user.profile.fullName,
-                        price: double.parse(getPlan.price).toInt(),
-                        plan: getPlan.title,
-                        planCommission: getPlan.commission,
-                        planTax: getPlan.tax,
-                      ).chargeCardAndmakePayment();
+                    child: circular
+                        ? const SpinKitThreeInOut(
+                            color: Colors.white,
+                            size: 20.0,
+                          )
+                        : Row(
+                            // ignore: prefer_const_literals_to_create_immutables
+                            children: [
+                              const Icon(Icons.security),
+                              SizedBox(
+                                width: 5.w,
+                              ),
+                              const Text("Proceed to Payment"),
+                            ],
+                          ),
+                    onPressed: () async {
+                      if (currentUser.user.email == null ||
+                          currentUser.user.email == "") {
+                        setState(() {
+                          circular = true;
+                        });
+                        return null;
+                      } else {
+                        // ignore: avoid_print
+                        print("Pay with paystack...");
+                        MakePayment(
+                          ctx: context,
+                          email: currentUser.user.email,
+                          fullname: currentUser.user.profile.fullName,
+                          price: double.parse(getPlan.price).toInt(),
+                          plan: getPlan.title,
+                        ).chargeCardAndmakePayment();
+                      }
                     },
                   ),
                 ),

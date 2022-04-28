@@ -219,7 +219,7 @@ class _loginScreenState extends State<loginScreen> {
                                 MaterialStateProperty.all(Colors.white),
                             padding: MaterialStateProperty.all(
                               EdgeInsets.symmetric(
-                                  vertical: 17.h, horizontal: 113.w),
+                                  vertical: 18.h, horizontal: 117.w),
                             ),
                             shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(
@@ -230,7 +230,7 @@ class _loginScreenState extends State<loginScreen> {
                           child: loader
                               ? const SpinKitThreeInOut(
                                   color: Colors.white,
-                                  size: 20,
+                                  size: 13,
                                 )
                               : const Text("Login"),
                           onPressed: () {
@@ -290,6 +290,10 @@ class _loginScreenState extends State<loginScreen> {
         final body = jsonDecode(_response.body);
         //===print token if login was successful
         print("login token: " + body['token'].toString());
+
+        //===Here we store token inside shared preference
+        SharedPreferences _sharedPref = await SharedPreferences.getInstance();
+        await _sharedPref.setString("user", body['email'].toString());
         //===Display snack bar if user was successful.
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(

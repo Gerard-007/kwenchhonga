@@ -33,8 +33,7 @@ class EmptyTransactionScreen extends StatelessWidget {
   }
 }
 
-class ConstKY {
-  // ignore: constant_identifier_names
-  static const String PYSTCK_KY =
-      "pk_test_deccf766e2b4ccaf1481e28f39003a23b22785a4";
-}
+// class ConstKY {
+//   // ignore: constant_identifier_names
+//   static const String PYSTCK_KY = "public key here...";
+// }

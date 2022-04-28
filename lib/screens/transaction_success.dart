@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kwenchhonga/screens/home.dart';
+import 'package:kwenchhonga/screens/plans.dart';
 
 class transactionSuccessfulScreen extends StatefulWidget {
   const transactionSuccessfulScreen({key}) : super(key: key);
@@ -35,7 +35,7 @@ class _transactionSuccessfulScreenState
                 ),
               ),
               SizedBox(
-                height: 40.h,
+                height: 30.h,
               ),
               const Icon(
                 Icons.done_outline_rounded,
@@ -43,7 +43,7 @@ class _transactionSuccessfulScreenState
                 size: 200,
               ),
               SizedBox(
-                height: 40.h,
+                height: 30.h,
               ),
               Container(
                 padding: EdgeInsets.symmetric(
@@ -127,19 +127,19 @@ class _transactionSuccessfulScreenState
                   child: Row(
                     // ignore: prefer_const_literals_to_create_immutables
                     children: [
-                      const Icon(Icons.home_filled),
+                      const Icon(Icons.account_balance),
                       SizedBox(
                         width: 5.w,
                       ),
-                      const Text("back to dashboard"),
+                      const Text("back to plans"),
                     ],
                   ),
                   onPressed: () {
-                    print("Get back to dashboard");
+                    print("Get back to plans");
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) {
-                        return const HomeScreen();
+                        return const PlansScreen();
                       }),
                     );
                   },
